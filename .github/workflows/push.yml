@@ -24,7 +24,7 @@ jobs:
           minor-wording:  'minor'
           major-wording:  'major,MAJOR'
           patch-wording:  'patch,fixes'     # Providing patch-wording will override commits
-          rc-wording:     'release,RELEASE,alpha'
+          rc-wording:     'release,RELEASE'
           preid: 'rc'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
