@@ -32,5 +32,5 @@ jobs:
 
       - name: Output Step
         env:
-          VERSION: ${{ steps.package-json.outputs.version }}
+          VERSION: ${{ steps.package-json.outputs }}
         run: echo "new version $VERSION"
