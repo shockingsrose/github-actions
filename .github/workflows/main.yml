@@ -27,7 +27,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: cat package.json
-        id: package-json,
+        id: package-json
         run: cat ./package.json
 
       - name: Output Step
