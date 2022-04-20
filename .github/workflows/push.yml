@@ -25,6 +25,7 @@ jobs:
           major-wording:  'major,MAJOR'
           patch-wording:  'patch,fixes'     # Providing patch-wording will override commits
           rc-wording:     'release,RELEASE,alpha'
+          preid: 'rc'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: 'cat package.json'
