@@ -21,7 +21,10 @@ jobs:
         id: version-bump
         uses: 'phips28/gh-action-bump-version@master'
         with:
-          tag-prefix: 'v'
+          minor-wording:  'minor'
+          major-wording:  'major'
+          patch-wording:  'patch,fixes'     # Providing patch-wording will override commits
+          rc-wording:     'release,RELEASE,alpha'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: 'cat package.json'
