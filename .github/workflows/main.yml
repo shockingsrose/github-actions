@@ -26,11 +26,11 @@ jobs:
       - uses: actions/checkout@v3
 
       # Runs a single command using the runners shell
-      - name: 'cat package.json'
-        id: 'package-json',
+      - name: cat package.json
+        id: package-json,
         run: cat ./package.json
 
-      - name: 'Output Step'
+      - name: Output Step
         env:
           VERSION: ${{ steps.package-json.outputs.version }}
         run: echo "new version $VERSION"
