@@ -22,7 +22,7 @@ jobs:
         uses: 'phips28/gh-action-bump-version@master'
         with:
           minor-wording:  'minor'
-          major-wording:  'major'
+          major-wording:  'major,MAJOR'
           patch-wording:  'patch,fixes'     # Providing patch-wording will override commits
           rc-wording:     'release,RELEASE,alpha'
         env:
