@@ -1,0 +1,15 @@
+name: 'release'
+
+on:
+  push:
+    branches:
+      - 'master'
+
+jobs:
+  bump-version:
+    name: 'create release on master'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 'release'
+        run: hub release create -m "this is custom run release" "$(date +%Y%m%d%H%M%S)"
