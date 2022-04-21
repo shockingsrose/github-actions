@@ -11,5 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v3
+      
       - name: 'release'
         run: hub release create -m "this is custom run release" "$(date +%Y%m%d%H%M%S)"
