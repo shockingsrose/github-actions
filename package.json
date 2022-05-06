@@ -1,5 +1,5 @@
 {
-  "name": "github-actions",
+  "name": "zzp-github-actions",
   "version": "1.2.13",
   "description": "learn how to use github actions",
   "main": "index.js",
