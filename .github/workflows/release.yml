@@ -32,6 +32,7 @@ jobs:
       - name: 'npm publish'
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish
       # - name: 'deploy surge'
       # - name: 'deploy github pages'
         
