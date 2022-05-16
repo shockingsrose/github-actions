@@ -9,6 +9,39 @@ on:
 
 jobs:
   bump-version:
+    name: 'Bump Version on master'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 'Checkout source code'
+        uses: 'actions/checkout@v2'
+        with:
+          ref: ${{ github.ref }}
+
+      - name: 'cat package.json'
+        run: cat ./package.json
+
+      - name: 'Automated Version Bump'
+        id: version-bump
+        uses: 'phips28/gh-action-bump-version@master'
+        with:
+          major-wording:  'major,MAJOR'
+          minor-wording:  'minor,MINOR'
+          patch-wording:  'patch,fixes'     # Providing patch-wording will override commits
+          rc-wording:     'release,RELEASE'
+          preid: 'rc'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 'cat package.json'
+        run: cat ./package.json
+
+      - name: 'Output new tag'
+        env:
+          NEW_TAG: ${{ steps.version-bump.outputs.newTag }}
+        run: echo "new tag $NEW_TAG"
+
+  create-release:
     name: 'create release on master'
     runs-on: ubuntu-latest
     steps:
@@ -18,22 +51,6 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        title: v1.2.2
-  build:
-    name: 'build bundle and deploy'  
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 14
-          registry-url: 'https://registry.npmjs.org'
-      - name: 'build'
-        run: npm i && npm run build
-      - name: 'npm publish'
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm publish
-      # - name: 'deploy surge'
-      # - name: 'deploy github pages'
+        title: ${{ steps.version-bump.outputs.newTag }}
+  
         
