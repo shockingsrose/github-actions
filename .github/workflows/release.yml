@@ -41,7 +41,11 @@ jobs:
       #     NEW_TAG: ${{ steps.version-bump.outputs.newTag }}
       #   run: echo "new tag $NEW_TAG"
 
+      - name: get-npm-version
+        id: package-version
+        uses: martinbeentjes/npm-get-version-action@main
+
       - name: Create a Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh release create v1.3.17
+        run: gh release create ${{ steps.package-version.outputs.current-version}} --target master
