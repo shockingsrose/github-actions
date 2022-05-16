@@ -48,4 +48,4 @@ jobs:
       - name: Create a Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh release create ${{ steps.package-version.outputs.current-version}} --target master
+        run: gh release create ${{ steps.package-version.outputs.current-version}} --target master -p
