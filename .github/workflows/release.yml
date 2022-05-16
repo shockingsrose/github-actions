@@ -18,34 +18,30 @@ jobs:
         with:
           ref: ${{ github.ref }}
 
-      - name: 'cat package.json'
-        run: cat ./package.json
+      # - name: 'cat package.json'
+      #   run: cat ./package.json
 
-      - name: 'Automated Version Bump'
-        id: version-bump
-        uses: 'phips28/gh-action-bump-version@master'
-        with:
-          major-wording:  'major,MAJOR'
-          minor-wording:  'minor,MINOR'
-          patch-wording:  'patch,PATCH,fixes'     # Providing patch-wording will override commits
-          rc-wording:     'release,RELEASE'
-          preid: 'rc'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: 'Automated Version Bump'
+      #   id: version-bump
+      #   uses: 'phips28/gh-action-bump-version@master'
+      #   with:
+      #     major-wording:  'major,MAJOR'
+      #     minor-wording:  'minor,MINOR'
+      #     patch-wording:  'patch,PATCH,fixes'     # Providing patch-wording will override commits
+      #     rc-wording:     'release,RELEASE'
+      #     preid: 'rc'
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: 'cat package.json'
-        run: cat ./package.json
+      # - name: 'cat package.json'
+      #   run: cat ./package.json
 
-      - name: 'Output new tag'
-        env:
-          NEW_TAG: ${{ steps.version-bump.outputs.newTag }}
-        run: echo "new tag $NEW_TAG"
+      # - name: 'Output new tag'
+      #   env:
+      #     NEW_TAG: ${{ steps.version-bump.outputs.newTag }}
+      #   run: echo "new tag $NEW_TAG"
 
       - name: Create a Release
-        uses: elgohr/Github-Release-Action@v4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          title: ${{ steps.version-bump.outputs.newTag }}
-
-        
+        run: gh release create v1.2.17
