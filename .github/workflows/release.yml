@@ -42,6 +42,7 @@ jobs:
         run: echo "new tag $NEW_TAG"
 
   create-release:
+    needs: bump-version
     name: 'create release on master'
     runs-on: ubuntu-latest
     steps:
