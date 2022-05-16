@@ -27,7 +27,7 @@ jobs:
         with:
           major-wording:  'major,MAJOR'
           minor-wording:  'minor,MINOR'
-          patch-wording:  'patch,fixes'     # Providing patch-wording will override commits
+          patch-wording:  'patch,PATCH,fixes'     # Providing patch-wording will override commits
           rc-wording:     'release,RELEASE'
           preid: 'rc'
         env:
