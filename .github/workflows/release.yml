@@ -41,17 +41,15 @@ jobs:
           NEW_TAG: ${{ steps.version-bump.outputs.newTag }}
         run: echo "new tag $NEW_TAG"
 
-  create-release:
-    needs: bump-version
-    name: 'create release on master'
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - name: Create a Release
-      uses: elgohr/Github-Release-Action@v4
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        title: ${{ steps.version-bump.outputs.newTag }}
-  
+      - name: 'create release on master'
+        runs-on: ubuntu-latest
+        steps:
+        - uses: actions/checkout@v3
+        - name: Create a Release
+          uses: elgohr/Github-Release-Action@v4
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          with:
+            title: ${{ steps.version-bump.outputs.newTag }}
+
         
