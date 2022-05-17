@@ -56,4 +56,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         # run: gh release create ${{ steps.package-version.outputs.current-version}} --target master -p
-        run: gh release create ${{ steps.predeploy.outputs.version }} --target master -n ${{ steps.predeploy.outputs.changeLog }}
+        run: gh release create ${{ steps.predeploy.outputs.version }} --target master --notes '${{ steps.predeploy.outputs.changeLog }}'
