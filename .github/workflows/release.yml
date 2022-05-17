@@ -41,13 +41,22 @@ jobs:
       #     NEW_TAG: ${{ steps.version-bump.outputs.newTag }}
       #   run: echo "new tag $NEW_TAG"
 
-      - name: get-npm-version
-        id: package-version
-        uses: martinbeentjes/npm-get-version-action@main
+      # - name: get-npm-version
+      #   id: package-version
+      #   uses: martinbeentjes/npm-get-version-action@main
 
-      - name: Create a Release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        # run: gh release create ${{ steps.package-version.outputs.current-version}} --target master -p
-        run: gh release create ${{ steps.package-version.outputs.current-version}} --target master -F CHANGELOG.md
-          
+      # - name: Create a Release
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   # run: gh release create ${{ steps.package-version.outputs.current-version}} --target master -p
+      #   run: gh release create ${{ steps.package-version.outputs.current-version}} --target master -F CHANGELOG.md
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 14
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: get changelog
+        id: predeploy
+        run: npm run predeploy
+
+      - run: echo ${{ steps.predeploy.outputs.predeploy }}

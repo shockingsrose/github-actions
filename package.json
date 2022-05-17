@@ -16,7 +16,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "node scripts/tools.js"
   },
   "dependencies": {
     "react": "^18.0.0",
