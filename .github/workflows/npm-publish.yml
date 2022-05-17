@@ -1,28 +1,28 @@
-# name: NPM PUBLISH
+name: NPM PUBLISH
 
-# on:
-#   workflow_run:
-#     workflows: ["release"]
-#     types:
-#       - completed
+on:
+  workflow_run:
+    workflows: ["release"]
+    types:
+      - completed
 
-# jobs:
-#   build:
-#     name: 'npm publish'  
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v3
-#       - uses: actions/setup-node@v3
-#         with:
-#           node-version: 14
-#           registry-url: 'https://registry.npmjs.org'
+jobs:
+  build:
+    name: 'npm publish'  
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 14
+          registry-url: 'https://registry.npmjs.org'
 
-#       - name: 'install and build'
-#         run: |
-#           npm install
-#           npm run build
+      - name: 'install and build'
+        run: |
+          npm install
+          npm run build
 
-#       - name: 'npm publish'
-#         env:
-#           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-#         run: npm publish
+      - name: 'npm publish'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish
