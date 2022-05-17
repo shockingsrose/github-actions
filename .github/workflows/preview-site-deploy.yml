@@ -24,11 +24,6 @@ jobs:
           npm install
           npm run build
 
-      - name: 'npm publish'
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm publish
-
       - name: Deploy 🚀 （github pages）
         uses: JamesIves/github-pages-deploy-action@v4.2.5
         with:
@@ -42,4 +37,4 @@ jobs:
       - name: 'deploy surge'
         run: |
             export DEPLOY_DOMAIN=https://preview-${{ steps.predeploy.outputs.version }}-shockingsrose.surge.sh
-            npx surge --project ./ --domain $DEPLOY_DOMAIN --token ${{ secrets.SURGE_TOKEN }}
+            npx surge --project ./docs --domain $DEPLOY_DOMAIN --token ${{ secrets.SURGE_TOKEN }}
