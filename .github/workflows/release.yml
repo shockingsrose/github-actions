@@ -61,4 +61,5 @@ jobs:
             npm install
             npm run predeploy
             
-      - run: echo ${{ steps.predeploy.outputs.changeLog }}
+      - name: echo outputs
+        run: echo "${{ steps.predeploy.outputs.changeLog }}"
