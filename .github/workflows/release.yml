@@ -41,15 +41,6 @@ jobs:
       #     NEW_TAG: ${{ steps.version-bump.outputs.newTag }}
       #   run: echo "new tag $NEW_TAG"
 
-      # - name: get-npm-version
-      #   id: package-version
-      #   uses: martinbeentjes/npm-get-version-action@main
-
-      # - name: Create a Release
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   # run: gh release create ${{ steps.package-version.outputs.current-version}} --target master -p
-      #   run: gh release create ${{ steps.package-version.outputs.current-version}} --target master -F CHANGELOG.md
       - uses: actions/setup-node@v3
         with:
           node-version: 14
@@ -61,5 +52,8 @@ jobs:
             npm install
             npm run predeploy
             
-      - name: echo outputs
-        run: echo "${{ steps.predeploy.outputs.changeLog }}"
+      - name: Create a Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # run: gh release create ${{ steps.package-version.outputs.current-version}} --target master -p
+        run: gh release create ${{ steps.predeploy.outputs.version }} --target master -n ${{ steps.predeploy.outputs.chanegLog }}

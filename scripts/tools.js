@@ -11,7 +11,11 @@ const run = async () => {
 
   const [, changeLog] = /(###\s+[\w.]+\n[\s\S]+)###/.exec(changeLogData);
 
-  core.setOutput('changeLog', changeLog);
+  const outputs = { version, changeLog }
+
+  Object.entries(outputs).forEach(([key, value]) => {
+    core.setOutput(key, value);
+  })
 
 }
 
