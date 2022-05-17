@@ -22,7 +22,7 @@ jobs:
       - name: 'install and build'
         run: |
           npm install
-          npm run build:site
+          npm run build
 
       - name: 'npm publish'
         env:
