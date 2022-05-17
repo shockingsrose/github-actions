@@ -1,10 +1,16 @@
 ## 版本更新日志
 
+### 1.3.5
+
+`2022-05-17`
+
+- 🔥 增加 `preview site deploy` workflow，部署到Github Pages 和 Surge站点
+
 ### 1.3.4
 
 `2022-05-17`
 
-- 🔥 增加 `npm publish` workflow，自动部署到npm源
+- 🔥 增加 `npm publish` workflow，自动发布到npm源
 
 ### 1.3.3
 

@@ -1,39 +1,43 @@
-# name: Preview Deploy
+name: Preview Deploy
 
-# on:
-#   workflow_run:
-#     workflows: ["release"]
-#     types:
-#       - completed
+on:
+  workflow_run:
+    workflows: ["release"]
+    types:
+      - completed
 
-# jobs:
-#   build:
-#     name: 'build bundle and deploy'  
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v3
-#       - uses: actions/setup-node@v3
-#         with:
-#           node-version: 14
-#           registry-url: 'https://registry.npmjs.org'
+jobs:
+  build:
+    name: 'build bundle and deploy'  
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 14
+          registry-url: 'https://registry.npmjs.org'
 
-#       - name: 'install and build'
-#         run: |
-#           npm install
-#           npm run build:site
+      - name: 'install and build'
+        run: |
+          npm install
+          npm run build:site
 
-#       - name: 'npm publish'
-#         env:
-#           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-#         run: npm publish
+      - name: 'npm publish'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish
 
-#       - name: Deploy 🚀 （github pages）
-#         uses: JamesIves/github-pages-deploy-action@v4.2.5
-#         with:
-#           branch: master # The branch the action should deploy to.
-#           folder: docs # The folder the action should deploy.  
+      - name: Deploy 🚀 （github pages）
+        uses: JamesIves/github-pages-deploy-action@v4.2.5
+        with:
+          branch: master # The branch the action should deploy to.
+          folder: docs # The folder the action should deploy.  
+      
+       - name: get changelog
+        id: predeploy
+        run: npm run predeploy
 
-#       - name: 'deploy surge'
-#         run: |
-#             export DEPLOY_DOMAIN=https://preview-${{ // TODO }}-shockingsrose.surge.sh
-#             npx surge --project ./ --domain $DEPLOY_DOMAIN --token ${{ secrets.SURGE_TOKEN }}
+      - name: 'deploy surge'
+        run: |
+            export DEPLOY_DOMAIN=https://preview-${{ steps.predeploy.outputs.version }}-shockingsrose.surge.sh
+            npx surge --project ./ --domain $DEPLOY_DOMAIN --token ${{ secrets.SURGE_TOKEN }}
