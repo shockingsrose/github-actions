@@ -45,7 +45,7 @@ const execAsync = promisify(exec);
 
   try {
     const { stdout } = await execAsync(`npm version ${newVersion}`);
-    console.log(chalk.green(`new version: `), chalk.bgGreen(stdout));
+    console.log(chalk.green(`new version: ${stdout}`));
   } catch (error) {
     console.log(chalk.red(error.stderr));
   }
