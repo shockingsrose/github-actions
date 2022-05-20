@@ -22,20 +22,20 @@ const execAsync = promisify(exec);
       message: 'run npm version',
       choices: ['patch', 'minor', 'major', 'prerelease', 'prerelease:alpha', 'prerelease:beta', 'prerelease:rc', 'prerelease:stable'],
     },
-    {
-      type: 'confirm',
-      name: 'release',
-      message: 'is release version?',
-    },
-    {
-      type: 'input',
-      name: 'npmTag',
-      message: 'npm tag(default: latest)',
-      default: 'latest'
-    }
+    // {
+    //   type: 'confirm',
+    //   name: 'release',
+    //   message: 'is release version?',
+    // },
+    // {
+    //   type: 'input',
+    //   name: 'npmTag',
+    //   message: 'npm tag(default: latest)',
+    //   default: 'latest'
+    // }
   ])
 
-  let { newVersion, release, npmTag } = answers;
+  let { newVersion, release } = answers;
 
   /** npm version */
   if (newVersion.includes('prerelease:')) {
@@ -49,8 +49,6 @@ const execAsync = promisify(exec);
   } catch (error) {
     console.log(chalk.red(error.stderr));
   }
-  /** TODO github release */
-  /** TODO npm tag */
 
 
 
