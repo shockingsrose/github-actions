@@ -21,6 +21,7 @@ const execAsync = promisify(exec);
       name: 'newVersion',
       message: 'run npm version',
       choices: ['patch', 'minor', 'major', 'prerelease', 'prerelease:alpha', 'prerelease:beta', 'prerelease:rc', 'prerelease:stable'],
+      loop: false,
     },
     // {
     //   type: 'confirm',
@@ -35,7 +36,7 @@ const execAsync = promisify(exec);
     // }
   ])
 
-  let { newVersion, release } = answers;
+  let { newVersion } = answers;
 
   /** npm version */
   if (newVersion.includes('prerelease:')) {
