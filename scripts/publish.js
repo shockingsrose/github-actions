@@ -49,8 +49,8 @@ const execAsync = promisify(exec);
   } catch (error) {
     console.log(chalk.red(error.stderr));
   }
-  /** github release */
-  /** npm tag */
+  /** TODO github release */
+  /** TODO npm tag */
 
 
 
